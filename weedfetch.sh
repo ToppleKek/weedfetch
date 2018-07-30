@@ -36,6 +36,15 @@ elif [ $wf_os = "Void" ]; then
 	wf_packages="$(xbps-query -l | wc -l) (xbps)"
 elif [ $wf_os = "ManjaroLinux" ]; then
 	wf_packages="$(pacman -Q | wc -l) (pacman)"
+else
+	if [ $wf_warnings = y ]; then
+		printf "Warning: Couldn't detect the number of installed packages.\n" >&2
+		printf "         Set the WF_PACKAGES variable to manually specify it.\n" >&2
+		printf "         (If you add support for this OS/distro and send a PR, that'd be great)\n" >&2
+		printf "         Suppress this warning with -w.\n\n" >&2
+	fi
+	wf_packages=$WF_PACKAGES
+	break
 fi
 
 wf_shell="$(basename $SHELL)"
