@@ -87,7 +87,7 @@ for i in $process_list; do
 		araiwm) wf_wm="araiwm";break;;
 	esac
 done
-if [ $wf_wm = "" ]; then
+if [ -z $wf_wm ]; then
 	if [ $wf_warnings = y ]; then
 		printf "Warning: Couldn't detect WM.\n" >&2
 		printf "         Set the WF_WM variable to manually specify it.\n" >&2
